@@ -1,20 +1,24 @@
 package com.svtask2;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.os.Build;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
-public class MainActivity extends Activity {
-
+public class MainActivity extends Activity {			
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,16 +54,52 @@ public class MainActivity extends Activity {
 	 */
 	public static class PlaceholderFragment extends Fragment {
 
+		private EditText etInput;
+		private TextView tvScore;
+		private TextView tvLives;
+		private TextView tvEntered;
+		private TextView tvRepeat;
+		private TextView tvTimer;
+		
 		public PlaceholderFragment() {
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
+			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+			
+			etInput = (EditText)rootView.findViewById(R.id.editText_inputed_words);
+			tvScore = (TextView)rootView.findViewById(R.id.textView_score);
+			tvLives = (TextView)rootView.findViewById(R.id.textView_lives);
+			tvEntered = (TextView)rootView.findViewById(R.id.textView_entered);
+			tvRepeat = (TextView)rootView.findViewById(R.id.textView_need_word);
+			tvTimer = (TextView)rootView.findViewById(R.id.textView_timer);
+			
+			etInput.addTextChangedListener(new TextWatcher() {
+				
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+					// TODO Auto-generated method stub
+					tvEntered.setText(etInput.getText());
+				}
+				
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count,
+						int after) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+					
+				}
+			}); 
+			
 			return rootView;
-		}
+		}				
 	}
 
 }
