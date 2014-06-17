@@ -8,6 +8,9 @@
     <string name="please_repeat">Please repeat:</string>
     <string name="score">Score:</string>
     <string name="lives">Lives:</string>
+    <string name="gameover">GAMEOVER</string>
+    <string name="you_got">You\'ve got</string>
+    <string name="you_scores">Scores</string>
 
     <string-array name="words">
 	<item>apple</item>
