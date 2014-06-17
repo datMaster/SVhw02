@@ -1,10 +1,13 @@
-package com.svtask2;
+package com.svtask;
 
 import java.util.Random;
+
+import com.svtask2.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -65,9 +69,9 @@ public class MainActivity extends Activity {
 		private CharSequence[] words;
 		private int score;
 		private int lives;
-		private Random rand;		
-		
+		private Random rand;				
 		private CountDownTimer timer;
+		
 		
 		public PlaceholderFragment() {
 		}
@@ -96,7 +100,7 @@ public class MainActivity extends Activity {
 				}
 				
 				@Override
-				public void onFinish() {
+				public void onFinish() {					
 					if(isTimerStarted) {						
 						dead();
 					}
@@ -187,6 +191,7 @@ public class MainActivity extends Activity {
 		}
 		
 		private void showAlert() {
+			hideSoftKeyboard(getActivity().getApplicationContext());
 			new AlertDialog.Builder(getActivity())
 		    .setTitle(getString(R.string.gameover))
 		    .setMessage(getString(R.string.you_got) 
@@ -196,7 +201,7 @@ public class MainActivity extends Activity {
 		        public void onClick(DialogInterface dialog, int which) { 
 		            init();
 		        }
-		     })		    
+		     })
 		    .setIcon(android.R.drawable.ic_dialog_info)
 		    .show();
 		}
@@ -209,6 +214,11 @@ public class MainActivity extends Activity {
 		private void startTimer() {
 			timer.start();
 			isTimerStarted = true;
+		}
+		
+		public void hideSoftKeyboard(Context context) {
+			InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(etInput.getWindowToken(), 0);
 		}
 	}
 

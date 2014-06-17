@@ -1,4 +1,4 @@
-package com.svtask2;
+package com.svtask;
 
 public class Constants {
 	public static final int TIMER_IN_FUTURE = 6000;
